@@ -30,7 +30,6 @@ app.use((request, response, next) => {
 });
 app.use(bodyParser.json());
 db();
-
 app.get("/", (req, res) => res.send('Hi My heart is Working...'));
 
 app.post("/signup", async (req, res) => {
