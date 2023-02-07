@@ -1,5 +1,5 @@
 const userModel = require('./../models/user.model').userModel;
-
+var md5 = require('md5');
 module.exports = {
    registration: async (req, res) => {
         try {
