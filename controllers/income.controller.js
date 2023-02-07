@@ -1,42 +1,59 @@
 const incomeModel = require('./../models/income.model').incomeModel;
-var startOfDay = require('date-fns/startOfDay');
-var endOfDay = require('date-fns/endOfDay');
+const crudBusiness = require('./../business/crud.business');
 
 module.exports = {
-    createIncome:  async (req, res) => {
+    createIncome: async (req, res) => {
         try {
-            var result = await new incomeModel({
-                timestamp: new Date(),
-                typename: req.body.typename,
-                amount: req.body.amount
-            }).save()
+            const result = await crudBusiness.createData(incomeModel, { timestamp: new Date(), ...req.body });
             res.send(result);
         } catch (err) {
             console.log('err' + err)
             res.send({ error: true, message: 'Internal Error' })
         }
     },
-    incomeList:  async (req, res) => {
+    updateIncome: async (req, res) => {
         try {
-            var result = await incomeModel.find({ timestamp: { $gte: startOfDay(new Date()), $lt: endOfDay(new Date()) } });
+            const result = await crudBusiness.updateData(incomeModel,req.body,req.params.id);
+            res.send(result);
+        } catch (err) {
+            console.log('err' + err);
+            res.send({ error: true, message: 'Internal Error' });
+        }
+    },
+    listIncome: async (req, res) => {
+        try {
+            const result = await crudBusiness.Listdata(incomeModel,false);
             res.send(result)
         } catch (err) {
             console.log('err' + err)
             res.send({ error: true, message: 'Internal Error' })
         }
     },
-    incomeFilter: async (req, res) => {
+    filterIncome: async (req, res) => {
         try {
-            var result = await incomeModel.find({
-                timestamp: {
-                    $gte: startOfDay(new Date(req.body.startdate)),
-                    $lt: endOfDay(new Date(req.body.enddate))
-                }
-            })
+            const result = await crudBusiness.FilterData(incomeModel,req.body);
             res.send(result)
         } catch (err) {
             console.log('err' + err)
             res.send({ error: true, message: 'Internal Error' })
         }
-    }
+    },
+    fetchIncomeById: async (req, res) => {
+        try {
+            const result = await crudBusiness.getByIdData(incomeModel,req.params.id);
+            res.send(result);
+        } catch (err) {
+            console.log('err' + err);
+            res.send({ error: true, message: 'Internal Error' });
+        }
+    },
+    deleteIncomeById: async (req, res) => {
+        try {
+            const result = await crudBusiness.deleteData(incomeModel,req.params.id);
+            res.send(result);
+        } catch (err) {
+            console.log('err' + err);
+            res.send({ error: true, message: 'Internal Error' });
+        }
+    },
 }

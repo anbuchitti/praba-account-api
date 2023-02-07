@@ -1,41 +1,52 @@
 
 const  accounttypeModel = require('./../models/account-type.model');
+const crudBusiness = require('./../business/crud.business');
 
 module.exports = {
     createAccountType: async (req, res) => {
         try {
-            const checkexist = await accounttypeModel.find({ uniqueid: req.body.uniqueid });
-            if (checkexist.length > 0) {
-                res.send({ error: true, message: 'This type name already exist' })
-            } else {
-                var result = await new accounttypeModel({
-                    uniqueid: req.body.uniqueid,
-                    typename: req.body.typename
-                }).save()
-                res.send(result)
-            }
-    
+            const result = await crudBusiness.createData(accounttypeModel,req.body);
+            res.send(result);
         } catch (err) {
             console.log('err' + err)
             res.send({ error: true, message: 'Internal Error' })
         }
     },
-    accountTypeList: async (req, res) => {
+    updateAccoutType:async(req,res) => {
         try {
-            var result = await accounttypeModel.find({});
+            var result = await crudBusiness.updateData(accounttypeModel,req.body,req.params.id);
             res.send(result);
         } catch (err) {
             console.log('err' + err);
             res.send({ error: true, message: 'Internal Error' });
         }
     },
-    deleteAccountType: async (req, res) => {
+    listAccountType: async (req, res) => {
         try {
-            var result = await accounttypeModel.remove({ _id: req.params.id });
+            const result = await crudBusiness.Listdata(accounttypeModel,true);
+            res.send(result);
+        } catch (err) {
+            console.log('err' + err);
+            res.send({ error: true, message: 'Internal Error' });
+        }
+    },
+    fetchAccountTypeById: async(req,res) => {
+        try {
+            var result = await crudBusiness.getByIdData(accounttypeModel,req.params.id);
+            res.send(result);
+        } catch (err) {
+            console.log('err' + err);
+            res.send({ error: true, message: 'Internal Error' });
+        }
+    },
+    deleteAccountTypeById: async (req, res) => {
+        try {
+            var result = await crudBusiness.deleteData(accounttypeModel,req.params.id);
             res.send(result);
         } catch (err) {
             console.log('err' + err);
             res.send({ error: true, message: 'Internal Error' });
         }
     }
+    
 }

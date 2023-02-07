@@ -32,17 +32,25 @@ app.post("/signup", userController.registration);
 app.post("/login", userController.login);
 
 app.post('/accounttype/create', accounttypeController.createAccountType);
-app.get('/accounttype/list',accounttypeController.accountTypeList);
-app.delete('/accounttype/delete/:id',accounttypeController.deleteAccountType);
+app.put('/accounttype/update/:id', accounttypeController.updateAccoutType);
+app.get('/accounttype/list',accounttypeController.listAccountType);
+app.get('/accounttype/byid/:id',accounttypeController.fetchAccountTypeById);
+app.delete('/accounttype/delete/:id',accounttypeController.deleteAccountTypeById);
 
 app.post('/income/create',incomeController.createIncome);
-app.get('/income/list',incomeController.incomeList);
-app.post('/income/filter',incomeController.incomeFilter);
+app.put('/income/update/:id',incomeController.updateIncome);
+app.get('/income/list',incomeController.listIncome);
+app.get('/income/byid/:id',incomeController.fetchIncomeById);
+app.post('/income/filter',incomeController.filterIncome);
+app.delete('/income/delete/:id',incomeController.deleteIncomeById);
+
 
 app.post('/expense/create',expenseController.createExpense);
-app.get('/expense/list',expenseController.expenseList);
-app.delete('/expense/delete/:id',expenseController.deleteExpense);
-app.post('/expense/filter',expenseController.expenseFilter);
+app.put('/expense/update/:id',expenseController.updateExpense);
+app.get('/expense/list',expenseController.listExpense);
+app.get('/expense/byid/:id',expenseController.fetchExpenseById);
+app.post('/expense/filter',expenseController.filterExpense);
+app.delete('/expense/delete/:id',expenseController.deleteExpenseById);
 
 app.listen(3000, () => {
     console.log('connected port is 3000');
