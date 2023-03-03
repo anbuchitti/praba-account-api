@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
-const accounttypeSchema = new mongoose.Schema({
+const accountTypeSchema = new mongoose.Schema({
     uniqueid:String,
     typename:String
 });
 
-const accounttypeModel = mongoose.model('account-type',accounttypeSchema);
-module.exports.accounttypeModel = accounttypeModel;
+const accountTypeModel = mongoose.model('account-type',accountTypeSchema);
+module.exports.accountTypeModel = accountTypeModel;

@@ -1,11 +1,11 @@
 
-const  accounttypeModel = require('./../models/account-type.model');
+const accountTypeModel = require('./../models/account-type.model').accountTypeModel;
 const crudBusiness = require('./../business/crud.business');
 
 module.exports = {
     createAccountType: async (req, res) => {
         try {
-            const result = await crudBusiness.createData(accounttypeModel,req.body);
+            const result = await crudBusiness.createData(accountTypeModel,req.body);
             res.send(result);
         } catch (err) {
             console.log('err' + err)
@@ -14,7 +14,7 @@ module.exports = {
     },
     updateAccoutType:async(req,res) => {
         try {
-            var result = await crudBusiness.updateData(accounttypeModel,req.body,req.params.id);
+            var result = await crudBusiness.updateData(accountTypeModel,req.body,req.params.id);
             res.send(result);
         } catch (err) {
             console.log('err' + err);
@@ -23,7 +23,7 @@ module.exports = {
     },
     listAccountType: async (req, res) => {
         try {
-            const result = await crudBusiness.Listdata(accounttypeModel,true);
+            const result = await crudBusiness.Listdata(accountTypeModel,true);
             res.send(result);
         } catch (err) {
             console.log('err' + err);
@@ -32,7 +32,7 @@ module.exports = {
     },
     fetchAccountTypeById: async(req,res) => {
         try {
-            var result = await crudBusiness.getByIdData(accounttypeModel,req.params.id);
+            var result = await crudBusiness.getByIdData(accountTypeModel,req.params.id);
             res.send(result);
         } catch (err) {
             console.log('err' + err);
@@ -41,12 +41,11 @@ module.exports = {
     },
     deleteAccountTypeById: async (req, res) => {
         try {
-            var result = await crudBusiness.deleteData(accounttypeModel,req.params.id);
+            var result = await crudBusiness.deleteData(accountTypeModel,req.params.id);
             res.send(result);
         } catch (err) {
             console.log('err' + err);
             res.send({ error: true, message: 'Internal Error' });
         }
-    }
-    
+    }    
 }

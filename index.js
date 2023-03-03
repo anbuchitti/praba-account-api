@@ -18,10 +18,10 @@ app.use(bodyParser.urlencoded({
 
 //Connect Mongo service
 app.use((req, res, next) => {
-    response.header("Access-Control-Allow-Origin", "*");
-    response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    response.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    response.header('Access-Control-Allow-Credentials', true);
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Credentials', true);
     next();
 });
 app.use(bodyParser.json());
@@ -43,7 +43,6 @@ app.get('/income/list',incomeController.listIncome);
 app.get('/income/byid/:id',incomeController.fetchIncomeById);
 app.post('/income/filter',incomeController.filterIncome);
 app.delete('/income/delete/:id',incomeController.deleteIncomeById);
-
 
 app.post('/expense/create',expenseController.createExpense);
 app.put('/expense/update/:id',expenseController.updateExpense);

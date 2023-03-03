@@ -34,7 +34,7 @@ module.exports = {
     Listdata: async (model,isAccount) => {
         try {
             if(isAccount)
-                return await accounttypeModel.find({});
+                return await model.find({});
             else
                 return await model.find({ timestamp: { $gte: startOfDay(new Date()), $lt: endOfDay(new Date()) } })
         } catch (err) {
